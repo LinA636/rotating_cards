@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { Flipper, Flipped } from "react-flip-toolkit";
 import ContentCard from "./ContentCard";
 
@@ -40,26 +40,48 @@ export default function Container2 () {
 
   return (
     <Flipper flipKey={activeCard}>
-      <Flex justifyContent="center" alignItems="center" gap={6}>
-        {reorderedCards.map((card) => (
-          <Flipped key={card.id} flipId={card.id} 
-            spring={{
-                stiffness: 80,
-                damping: 20,
-                overshootClamping: true,
-            }} >
-            <div >
-              <ContentCard
-                id={card.id}
-                text={card.text}
-                width={activeCard === card.id ? "300px" : "200px"}
-                height={activeCard === card.id ? "400px" : "300px"}
-                toggleFunction={() => toggleMoveCards(card.id)}
-                opacity={activeCard === card.id ? 1 : 0.5}
-              />
-            </div>
-          </Flipped>
-        ))}
+      <Flex justifyContent="center" 
+        alignItems="center" 
+        gap={6}
+        position="relative">
+            {reorderedCards.map((card) => {
+                const isMiddle = (activeCard === card.id);
+
+                // Define styles for the cards
+                const cardStyles = {
+                    opacity: isMiddle ? 1 : 0.5,
+                    position: isMiddle ? "absolute" : "relative",
+                    zIndex: isMiddle ? 2 : 1, // Middle card is in front
+                    transform: isMiddle ? "scale(1)" : "scale(0.8)", // Scale down outer cards
+                    transition: "transform 0.5s ease, opacity 0.5s ease",
+                    margin: isMiddle ? "0" : "0 50px", // Add margin to make space for the middle card
+                };
+
+                return (
+                    <Flipped key={card.id} 
+                            flipId={card.id} 
+                            spring={{
+                                stiffness: 80,
+                                damping: 20,
+                                overshootClamping: true,
+                        }}>
+                        
+                            <ContentCard
+                                id={card.id}
+                                text={card.text}
+                                width={isMiddle ? "300px" : "300px"}
+                                height={isMiddle ? "400px" : "400px"}
+                                toggleFunction={() => toggleMoveCards(card.id)}
+                                opacity={cardStyles.opacity}
+                                position={cardStyles.position} // Position the cards absolutely within the Flex container
+                                zIndex={cardStyles.zIndex}  // Bring the middle card forward
+                                transform={cardStyles.transform} // Shrink and move outer cards
+                                transition={cardStyles.transform}
+                            />
+                        
+                    </Flipped>
+                );
+            })}
       </Flex>
     </Flipper>
   );
