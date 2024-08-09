@@ -3,6 +3,9 @@ import { Box, Flex } from "@chakra-ui/react";
 import { Flipper, Flipped } from "react-flip-toolkit";
 import ContentCard from "./ContentCard";
 
+const [frontCardHeight, backCardHeight] = ['400px', '300px'];
+const [frontCardWidth, backCardWidth] = ['300px', '200px'];
+
 const cards = [{
         id: "left",
         text: "Card left",
@@ -62,8 +65,8 @@ export default function CardContainer () {
                     <ContentCard
                       id={card.id}
                       text={card.text}
-                      width={isMiddle ? "300px" : "200px"}
-                      height={isMiddle ? "400px" : "300px"}
+                      width={isMiddle ? frontCardWidth : backCardWidth}
+                      height={isMiddle ? frontCardHeight: backCardHeight}
                       toggleFunction={() => toggleMoveCards(card.id)}
                       opacity={isMiddle ? 1 : 0.5}
                       />
