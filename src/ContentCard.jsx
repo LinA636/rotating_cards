@@ -1,6 +1,7 @@
 import { Text, Card,  CardBody } from '@chakra-ui/react'
+import { transform } from 'framer-motion';
 
-export default function ContentCard({id, text, width, height, toggleFunction, opacity, position, zIndex, transform, transition}){
+export default function ContentCard({id, text, width, height, toggleFunction, opacity}){
     return(
         <Card id={id}
             bg="black"
@@ -8,15 +9,7 @@ export default function ContentCard({id, text, width, height, toggleFunction, op
             width={width}
             height={height}
             onClick={toggleFunction}
-            opacity={opacity}
-            style={{
-                zIndex: zIndex,
-                transform: transform,
-                position: position,
-                transition: transition,
-                transformStyle: 'preserve-3d',
-            }}
-            >
+            opacity={opacity}>
             <CardBody>
                 <Text>{text}</Text>
             </CardBody>
