@@ -1,12 +1,12 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
-import Container2 from './Container2';
+import CardContainer from './CardContainer';
 
 function App() {
   return (
     <Box align="center"
       width={"100vw"}>
-      <Container2/>
+      <CardContainer/>
     </Box>
   )
 }
