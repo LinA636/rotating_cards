@@ -1,8 +1,9 @@
 import { Text, Card,  CardBody } from '@chakra-ui/react'
+import { transform } from 'framer-motion';
 
 export default function ContentCard({id, text, width, height, toggleFunction, opacity}){
     return(
-        <Card id='id'
+        <Card id={id}
             bg="black"
             color="white"
             width={width}

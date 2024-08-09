@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { Flipper, Flipped } from "react-flip-toolkit";
 import ContentCard from "./ContentCard";
 
@@ -40,26 +40,36 @@ export default function Container2 () {
 
   return (
     <Flipper flipKey={activeCard}>
-      <Flex justifyContent="center" alignItems="center" gap={6}>
-        {reorderedCards.map((card) => (
-          <Flipped key={card.id} flipId={card.id} 
-            spring={{
-                stiffness: 80,
-                damping: 20,
-                overshootClamping: true,
-            }} >
-            <div >
-              <ContentCard
-                id={card.id}
-                text={card.text}
-                width={activeCard === card.id ? "300px" : "200px"}
-                height={activeCard === card.id ? "400px" : "300px"}
-                toggleFunction={() => toggleMoveCards(card.id)}
-                opacity={activeCard === card.id ? 1 : 0.5}
-              />
-            </div>
-          </Flipped>
-        ))}
+      <Flex 
+        justifyContent="space-evenly" 
+        alignItems="center" 
+        gap={100}
+        position='relative'>
+          {reorderedCards.map((card) => {
+            const isMiddle = (activeCard === card.id);
+            return (
+              <Flipped key={card.id} flipId={card.id} 
+                spring={{
+                    stiffness: 80,
+                    damping: 20,
+                    overshootClamping: true,
+                }} >
+                <Box 
+                  position={isMiddle? 'absolute' : 'relative'}
+                  zIndex={isMiddle ? 2 : 1}
+                  >
+                    <ContentCard
+                      id={card.id}
+                      text={card.text}
+                      width={isMiddle ? "300px" : "200px"}
+                      height={isMiddle ? "400px" : "300px"}
+                      toggleFunction={() => toggleMoveCards(card.id)}
+                      opacity={isMiddle ? 1 : 0.5}
+                      />
+                </Box>
+              </Flipped>
+            );
+        })}
       </Flex>
     </Flipper>
   );
