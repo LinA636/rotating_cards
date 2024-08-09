@@ -1,10 +1,12 @@
 import { Text, Card,  CardBody } from '@chakra-ui/react'
 
-export default function ContentCard({text}){
+export default function ContentCard({text, width, height, toggleFunction}){
     return(
         <Card bg="black"
             color="white"
-            width={"100px"}>
+            width={width}
+            height={height}
+            onClick={toggleFunction}>
             <CardBody>
                 <Text>{text}</Text>
             </CardBody>
