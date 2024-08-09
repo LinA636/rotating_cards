@@ -15,7 +15,7 @@ const cards = [{
     }];
 
 
-export default function Container2 () {
+export default function CardContainer () {
   const [activeCard, setActiveCard] = useState('front');
 
   const toggleMoveCards = (id) => {
@@ -48,12 +48,13 @@ export default function Container2 () {
           {reorderedCards.map((card) => {
             const isMiddle = (activeCard === card.id);
             return (
-              <Flipped key={card.id} flipId={card.id} 
+              <Flipped 
+                key={card.id} 
+                flipId={card.id} 
                 spring={{
                     stiffness: 80,
                     damping: 20,
-                    overshootClamping: true,
-                }} >
+                    overshootClamping: true,}} >
                 <Box 
                   position={isMiddle? 'absolute' : 'relative'}
                   zIndex={isMiddle ? 2 : 1}
