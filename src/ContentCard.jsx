@@ -1,4 +1,5 @@
 import { Text, Card,  CardBody } from '@chakra-ui/react'
+import './card.css'
 
 export default function ContentCard({id, text, width, height, toggleFunction, opacity, position, zIndex, transform, transition}){
     return(
@@ -14,6 +15,7 @@ export default function ContentCard({id, text, width, height, toggleFunction, op
                 transform: transform,
                 position: position,
                 transition: transition,
+                transformStyle: 'preserve-3d',
             }}
             >
             <CardBody>
