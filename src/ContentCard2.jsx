@@ -1,14 +1,12 @@
 import { Text, Card,  CardBody } from '@chakra-ui/react'
 
-export default function ContentCard({id, text, width, height, toggleFunction, opacity}){
+export default function ContentCard2({text, width, height, toggleFunction}){
     return(
-        <Card id='id'
-            bg="black"
+        <Card bg="black"
             color="white"
             width={width}
             height={height}
-            onClick={toggleFunction}
-            opacity={opacity}>
+            onClick={toggleFunction}>
             <CardBody>
                 <Text>{text}</Text>
             </CardBody>
