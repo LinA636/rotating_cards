@@ -1,8 +1,6 @@
-# React + Vite
+# Rotating Cards
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Using React, chakra-ui and react-flip-toolkit
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+three cards are displayed. Two in the background and one in front centered of the other two.
+When clicking one of the outer cards, all the cards rotate in a circle, so that the clicked card moves to the front.
