@@ -1,5 +1,7 @@
 /** Same Principle as CardContainer, only that this one can contain more than 3 cards.
  * The first card will be shown the biggest on the left side, and each card to the right will become smaller and smaller
+ * ! Whenever you click the third card, the cards move in blocks and not seprately from each other.
+ * -> looses the look of circling
  */
 
 
@@ -27,7 +29,7 @@ const cardsLength = cards.length;
 
 const frontCardSize = { width: 300, height: 400 };
 
-export default function CardContainerMoreCards () {
+export default function RotatingCardsContainerMoreThan3 () {
   const [activeCard, setActiveCard] = useState('front');
 
   const toggleMoveCards = (id) => {
@@ -54,7 +56,6 @@ export default function CardContainerMoreCards () {
         position='relative'>
           {reorderedCards.map((card, index) => {
             const isActive = (index === 0);
-            // Determine size based on position
             const opacity = index === 0 ? 1 : index === 1 ? 0.75 : 0.5;
             return (
               <Flipped 

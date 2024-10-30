@@ -18,7 +18,7 @@ const cards = [{
     }];
 
 
-export default function CardContainer () {
+export default function RotatingCardContainer3Cards () {
   const [activeCard, setActiveCard] = useState('front');
 
   const toggleMoveCards = (id) => {

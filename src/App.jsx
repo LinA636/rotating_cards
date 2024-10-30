@@ -1,13 +1,13 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
-import CardContainer from './CardContainer';
-import CardContainerMoreCards from './CardContainerMoreCards';
+import RotatingCardContainer3Cards from './RotatingCardContainer3Cards';
+import RotatingCardsContainerMoreThan3 from './RotatingCardsContainerMoreThan3';
 
 function App() {
   return (
     <Box align="center"
       width={"100vw"}>
-      <CardContainerMoreCards/>
+      <RotatingCardsContainerMoreThan3/>
     </Box>
   )
 }
