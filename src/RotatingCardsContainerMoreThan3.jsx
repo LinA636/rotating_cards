@@ -66,8 +66,6 @@ export default function RotatingCardsContainer() {
         gap={5}
         position="relative">
         {cardOrder.map((card, index) => {
-          const isActive = index === 0;
-          const opacity = isActive ? 1 : index === 1 ? 0.75 : 0.5;
 
           return (
             <Flipped 
