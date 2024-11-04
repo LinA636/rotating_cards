@@ -82,7 +82,8 @@ export default function RotatingCardsContainer() {
                   text={card.text}
                   width={frontCardSize.width/(index + 1)}
                   height={frontCardSize.height/(index + 1)}
-                  toggleFunction={() => handleCardClick(card.id)} 
+                  toggleFunction={() => handleCardClick(card.id)}
+                  fontSize={frontCardSize.width / (index + 1) * 0.1} 
                 />
               </Box>
             </Flipped>
