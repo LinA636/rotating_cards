@@ -46,11 +46,11 @@ export default function ClickContainerCard({ cards }) {
           )}
         </Flex>
 
-        {unfocusedCards.map((card, index) => {
+        {unfocusedCards.map((card) => {
           return (
             <Flex key={card.id} justifyContent='center'>
               <UnfocusedListItem 
-                index={index} 
+                index={card.id} 
                 card={card} 
                 onClick={onClick} />
             </Flex>

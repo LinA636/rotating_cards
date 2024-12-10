@@ -27,7 +27,7 @@ export default function FocusedListItem({ index, card, onClick }){
                         height={'400'}
                         variant={index === 0 ? 'activeCard' : 'hiddenCard'}
                         toggleFunction={() => onClick(index)}
-                        cardIndex={index}
+                        cardIndex={card.id}
                         />
                     </div>
                 </Flipped>
