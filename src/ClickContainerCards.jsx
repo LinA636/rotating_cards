@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Flipper, Flipped } from "react-flip-toolkit";
 import ContentCard from "./ContentCard";
 
@@ -61,59 +61,49 @@ const ExpandedListItem = ({ index, card, onClick }) => {
   );
 };
 
-class ClickContainerCards extends Component {
-    state = { focused: 0 }; // Set the first card as focused by default
+export default function ClickContainerCard ({ cards }) {
+  const [focused, setFocused] = useState(0); // Set the first card as focused by default
 
-    onClick = index => {
-      if (this.state.focused !== index) {
-        this.setState({
-          focused: index
-        });
-      }
-    };
-  render() {
-    const { cards } = this.props;
-    const { focused } = this.state;
-    const focusedCard = focused !== null ? cards[focused] : null;
-    const unfocusedCards = cards.filter((_, index) => index !== focused);
+  const onClick = index => {
+    setFocused(index);
+  };
 
-    return (
-      <Flipper
-        flipKey={this.state.focused}
-        className="staggered-list-content"
-        spring="gentle"
-        staggerConfig={{
-          card: {
-            reverse: this.state.focused !== null
-          }
-        }}
-        decisionData={this.state.focused}
-      >
-        <div style={{ display: 'grid', gridTemplateRows: '1fr 1fr', gap: '20px' }}>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            {focusedCard && (
-              <ExpandedListItem
-                index={focused}
-                card={focusedCard}
-                onClick={this.onClick}
-              />
-            )}
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <ul className="list" style={{ padding: 0, display: 'flex', justifyContent: 'center' }}>
-              {unfocusedCards.map((card, index) => {
-                return (
-                  <li key={card.id} style={{ listStyleType: 'none' }}>
-                    <ListItem index={index} card={card} onClick={this.onClick} />
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+  const focusedCard = focused !== null ? cards[focused] : null;
+  const unfocusedCards = cards.filter((_, index) => index !== focused);
+
+  return (
+    <Flipper
+      flipKey={focused}
+      className="staggered-list-content"
+      spring="gentle"
+      staggerConfig={{
+        card: {
+          reverse: focused !== null
+        }
+      }}
+      decisionData={focused}
+    >
+      <div style={{ display: 'grid', gridTemplateRows: '1fr 1fr', gap: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          {focusedCard && (
+            <ExpandedListItem
+              index={focused}
+              card={focusedCard}
+              onClick={onClick}
+            />
+          )}
         </div>
-      </Flipper>
-    );
-  }
-}
+        <div style={{ display: 'grid', gridTemplateColumns: `repeat(${unfocusedCards.length}, 1fr)`, gap: '10px' }}>
+          {unfocusedCards.map((card, index) => {
+            return (
+              <div key={card.id} style={{ display: 'flex', justifyContent: 'center' }}>
+                <ListItem index={index} card={card} onClick={onClick} />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </Flipper>
+  );
+};
 
-export default ClickContainerCards;
