@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Flipper, Flipped } from "react-flip-toolkit";
 import ContentCard from "./ContentCard";
 
-
 const createCardFlipId = index => `listItem-${index}`;
 
 const shouldFlip = index => (prev, current) =>
@@ -15,7 +14,7 @@ const ListItem = ({ index, card, onClick }) => {
       stagger="card"
       shouldInvert={shouldFlip(index)}
     >
-      <div className="listItem" onClick={() => onClick(index)} style={{ display: 'inline-block', margin: '0 10px' }}>
+      <div className="listItem" onClick={() => onClick(index)} style={{ display: 'inline-block', margin: '0 10px', zIndex: 1 }}>
         <Flipped inverseFlipId={createCardFlipId(index)}>
           <div className="listItemContent">
             <ContentCard
@@ -44,7 +43,7 @@ const ExpandedListItem = ({ index, card, onClick }) => {
         }, 400);
       }}
     >
-      <div className="expandedListItem" onClick={() => onClick(index)}>
+      <div className="expandedListItem" onClick={() => onClick(index)} style={{ zIndex: 10 }}>
         <Flipped inverseFlipId={createCardFlipId(index)}>
           <div className="expandedListItemContent">
             <ContentCard
@@ -70,6 +69,10 @@ class ClickContainerCards extends Component {
     });
   render() {
     const { cards } = this.props;
+    const { focused } = this.state;
+    const focusedCard = focused !== null ? cards[focused] : null;
+    const unfocusedCards = cards.filter((_, index) => index !== focused);
+
     return (
       <Flipper
         flipKey={this.state.focused}
@@ -82,23 +85,28 @@ class ClickContainerCards extends Component {
         }}
         decisionData={this.state.focused}
       >
-        <ul className="list" style={{ padding: 0, display: 'flex', justifyContent: 'center' }}>
-          {cards.map((card, index) => {
-            return (
-              <li key={index} style={{ listStyleType: 'none' }}>
-                {index === this.state.focused ? (
-                  <ExpandedListItem
-                    index={this.state.focused}
-                    card={card}
-                    onClick={this.onClick}
-                  />
-                ) : (
-                  <ListItem index={index} card={card} onClick={this.onClick} />
-                )}
-              </li>
-            );
-          })}
-        </ul>
+        <div style={{ display: 'grid', gridTemplateRows: '1fr 1fr', gap: '20px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            {focusedCard && (
+              <ExpandedListItem
+                index={focused}
+                card={focusedCard}
+                onClick={this.onClick}
+              />
+            )}
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <ul className="list" style={{ padding: 0, display: 'flex', justifyContent: 'center' }}>
+              {unfocusedCards.map((card, index) => {
+                return (
+                  <li key={index} style={{ listStyleType: 'none' }}>
+                    <ListItem index={index} card={card} onClick={this.onClick} />
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
       </Flipper>
     );
   }
