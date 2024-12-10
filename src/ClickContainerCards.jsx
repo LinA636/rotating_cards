@@ -62,11 +62,15 @@ const ExpandedListItem = ({ index, card, onClick }) => {
 };
 
 class ClickContainerCards extends Component {
-  state = { focused: null };
-  onClick = index =>
-    this.setState({
-      focused: this.state.focused === index ? null : index
-    });
+    state = { focused: 0 }; // Set the first card as focused by default
+
+    onClick = index => {
+      if (this.state.focused !== index) {
+        this.setState({
+          focused: index
+        });
+      }
+    };
   render() {
     const { cards } = this.props;
     const { focused } = this.state;
@@ -99,7 +103,7 @@ class ClickContainerCards extends Component {
             <ul className="list" style={{ padding: 0, display: 'flex', justifyContent: 'center' }}>
               {unfocusedCards.map((card, index) => {
                 return (
-                  <li key={index} style={{ listStyleType: 'none' }}>
+                  <li key={card.id} style={{ listStyleType: 'none' }}>
                     <ListItem index={index} card={card} onClick={this.onClick} />
                   </li>
                 );
