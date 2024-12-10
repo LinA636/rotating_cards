@@ -82,7 +82,7 @@ export default function PerformanceCard({id, title, description, src, color, wid
 PerformanceCard.propTypes = {                  
     id: PropTypes.number.isRequired, // card id
     title: PropTypes.string.isRequired, 
-    description: PropTypes.string.isRequired, 
+    description: PropTypes.string, 
     src: PropTypes.string.isRequired, 
     color: PropTypes.string.isRequired,
     width: PropTypes.string.isRequired, 

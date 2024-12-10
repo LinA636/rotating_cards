@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
-import RotatingCardContainer3Cards from './RotatingCardContainer3Cards';
-import RotatingCardsContainerMoreThan3 from './RotatingCardsContainerMoreThan3';
-import ClickContainerCards from './ClickContainerCards';
+import RotatingCardContainer3Cards from './Rotating cards horizontally/RotatingCardContainer3Cards';
+import RotatingCardsContainerMoreThan3 from './Rotating cards horizontally/RotatingCardsContainerMoreThan3';
+import ClickContainerCards from './Focused Card above unfocused Cards/ClickContainerCards';
 import { useIsSmallDevice } from './from other code/theme/breakpoints';
 
 const cardProps = [{
