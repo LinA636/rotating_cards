@@ -17,16 +17,15 @@ export default function UnfocusedListItem({ index, card, onClick }){
                 <Flipped inverseFlipId={createCardFlipId(index)}>
                     <div className="listItemContent">
                         <PerformanceCard
-                        id={card.id}
-                        title={card.title}
-                        src={card.src}
-                        color={card.color}
-                        width={'300'}
-                        height={'400'}
-                        variant={index === 0 ? 'activeCard' : 'hiddenCard'}
-                        toggleFunction={() => onClick(index)}
-                        cardIndex={card.id}
-                        />
+                            id={card.id}
+                            title={card.title}
+                            src={card.src}
+                            color={card.color}
+                            width={'300'}
+                            height={'400'}
+                            variant={index === 0 ? 'activeCard' : 'hiddenCard'}
+                            toggleFunction={() => onClick(index)}
+                            cardIndex={card.id}/>
                     </div>
                 </Flipped>
             </div>

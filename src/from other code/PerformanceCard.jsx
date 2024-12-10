@@ -61,7 +61,7 @@ export default function PerformanceCard({id, title, description, src, color, wid
                 display={isFocusedCard ? 'grid' : ''}
                 gridTemplateColumns={'2fr 3fr'}>
 
-                { isFocusedCard && (
+                {isFocusedCard && (
                     <TitleAndText 
                     text={description} 
                     variant={cardVariant}
