@@ -4,11 +4,9 @@
  * -> looses the look of circling
  */
 
-
 import React, { useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import { Flipper, Flipped } from "react-flip-toolkit";
-import ContentCard from "./ContentCard";
 import PerformanceCard from "../from other code/PerformanceCard";
 
 
@@ -18,11 +16,11 @@ export default function RotatingCardsContainer({cards}) {
   const [isAnimating, setIsAnimating] = useState(false);
 
   const cardsLength = cards.length;
-  const frontCardSize = { width: 300, height: 400 };
+  const focusedCardSize = { width: 300, height: 400 };
   
-  const calculateSize = (origSize, index, isFrontCard) => {
-    const multiplierWidth = isFrontCard? 1.5 : Math.pow(0.8, index);
-    const multiplierHeight = isFrontCard? 1.2 : Math.pow(0.8, index);
+  const calculateSize = (origSize, index, isFocusedCard) => {
+    const multiplierWidth = isFocusedCard? 1.5 : Math.pow(0.8, index);
+    const multiplierHeight = isFocusedCard? 1.2 : Math.pow(0.8, index);
     const width = Math.round(parseInt(origSize.width, 10) * multiplierWidth);
     const height = Math.round(parseInt(origSize.height, 10) * multiplierHeight);
     return { width: `${width}px`, height: `${height}px` };
@@ -64,21 +62,21 @@ export default function RotatingCardsContainer({cards}) {
         gap={5}
         position="relative">
         {cardOrder.map((card, index) => {
-          const isFrontCard = index == 0;
-          const {width, height} = getCardSize(frontCardSize, index);
+          const isFocusedCard = index == 0;
+          const {width, height} = getCardSize(focusedCardSize, index);
           return (
             <Flipped 
               key={card.id} 
               flipId={card.id}>
               <Box 
                 position={"relative"}
-                transform={isFrontCard ? '' : `translateX(${index * -40}px)`}
+                transform={isFocusedCard ? '' : `translateX(${index * -40}px)`}
                 zIndex={cardsLength - index}
                 transition="all linear">
                 <PerformanceCard
                   id={card.id}
                   title={card.title}
-                  description={isFrontCard ? card.description : undefined}
+                  description={isFocusedCard ? card.description : undefined}
                   src={card.src}
                   color={card.color}
                   width={width}
