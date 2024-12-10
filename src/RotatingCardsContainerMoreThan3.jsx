@@ -50,7 +50,7 @@ export default function RotatingCardsContainer() {
     for (let i = 0; i < targetIndex; i++) {
       rotateOneStep();
       // Warte auf die Animation
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise(resolve => setTimeout(resolve, 480));
     }
     
     setIsAnimating(false);
@@ -66,13 +66,14 @@ export default function RotatingCardsContainer() {
         gap={5}
         position="relative">
         {cardOrder.map((card, index) => {
-
+          const isFrontCard = index == 0;
           return (
             <Flipped 
               key={card.id} 
               flipId={card.id}>
               <Box 
-                position="relative"
+                position={"relative"}
+                transform={isFrontCard ? '' : `translateX(${index * -40}px)`}
                 zIndex={cardsLength - index}
                 transition="all linear">
                 <ContentCard
