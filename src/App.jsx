@@ -3,13 +3,13 @@ import { Box } from '@chakra-ui/react';
 import RotatingCardContainer3Cards from './RotatingCardContainer3Cards';
 import RotatingCardsContainerMoreThan3 from './RotatingCardsContainerMoreThan3';
 import ClickContainerCards from './ClickContainerCards';
-import { useIsSmallDevice } from './breakpoints';
+import { useIsSmallDevice } from './from other code/theme/breakpoints';
 
 const cardProps = [{
   title: "Wind",
   description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod, consectetur adipiscing elit, sed do eiusmod , sed do eiusmod , consectetur adipiscing elit, sed do eiusmod , sed do eiusmod    .`,
   src:'/public/wind-turbine.jpg',
-  color: '#B88700',
+  color: 'brand.midnightGreen.400',
   },{
       title: "PV",
       description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -17,7 +17,7 @@ const cardProps = [{
           veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
           commodo consequat.`,
       src: '/public/wind-turbine.jpg',
-      color: '#B88700',
+      color: 'brand.golden',
   },{
       title: "Pilotprojekte",
       description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -25,7 +25,7 @@ const cardProps = [{
           veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
           commodo consequat.`,
       src: '/public/wind-turbine.jpg',
-      color: '#B88700',
+      color: 'brand.sage',
   }, {
       title: "Test",
       description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -33,7 +33,7 @@ const cardProps = [{
           veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
           commodo consequat.`,
       src: '/public/wind-turbine.jpg',
-      color: '#B88700',
+      color: 'brand.sage',
   },
 ]
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Flipper, Flipped } from "react-flip-toolkit";
 import ContentCard from "./ContentCard";
 import { Flex, Grid } from "@chakra-ui/react";
+import PerformanceCard from "./from other code/PerformanceCard"; // Ensure this path is correct
 
 const createCardFlipId = index => `listItem-${index}`;
 
@@ -9,6 +10,7 @@ const shouldFlip = index => (prev, current) =>
   index === prev || index === current;
 
 const ListItem = ({ index, card, onClick }) => {
+    console.log(card)
   return (
     <Flipped
       flipId={createCardFlipId(index)}
@@ -18,13 +20,17 @@ const ListItem = ({ index, card, onClick }) => {
       <div className="listItem" onClick={() => onClick(index)} style={{ display: 'inline-block', margin: '0 10px', zIndex: 1 }}>
         <Flipped inverseFlipId={createCardFlipId(index)}>
           <div className="listItemContent">
-            <ContentCard
+            <PerformanceCard
               id={card.id}
-              text={card.text}
-              width={300}
-              height={400}
+              title={card.title}
+              description={card.description}
+              src={card.src}
+              color={card.color}
+              width={'300'}
+              height={'400'}
+              variant={index === 0 ? 'activeCard' : 'hiddenCard'}
               toggleFunction={() => onClick(index)}
-              fontSize={30}
+              cardIndex={index}
             />
           </div>
         </Flipped>
@@ -62,7 +68,7 @@ const ExpandedListItem = ({ index, card, onClick }) => {
   );
 };
 
-export default function ClickContainerCard ({ cards }) {
+export default function ClickContainerCard({ cards }) {
   const [focused, setFocused] = useState(0); // Set the first card as focused by default
 
   const onClick = index => {
@@ -86,7 +92,7 @@ export default function ClickContainerCard ({ cards }) {
     >
       <Grid gridTemplateRows={'1fr 1fr'} 
             gridTemplateColumns={'1fr 1fr 1fr'}
-            gap = '20px'
+            gap='20px'
             width='auto'
             justifyContent='start'
             gridTemplateAreas={`"header header header" "content1 content2 content3"`}>
@@ -101,13 +107,13 @@ export default function ClickContainerCard ({ cards }) {
           )}
         </Flex>
 
-          {unfocusedCards.map((card, index) => {
-            return (
-              <Flex key={card.id} justifyContent='center'>
-                <ListItem index={index} card={card} onClick={onClick} />
-              </Flex>
-            );
-          })}
+        {unfocusedCards.map((card, index) => {
+          return (
+            <Flex key={card.id} justifyContent='center'>
+              <ListItem index={index} card={card} onClick={onClick} />
+            </Flex>
+          );
+        })}
       </Grid>
     </Flipper>
   );
