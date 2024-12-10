@@ -5,22 +5,48 @@ import RotatingCardsContainerMoreThan3 from './RotatingCardsContainerMoreThan3';
 import ClickContainerCards from './ClickContainerCards';
 import { useIsSmallDevice } from './breakpoints';
 
-const cards = [{
-    id: 1,
-    text: "Card left",
-},{
-    id: 2,
-    text: "Card front",
-},{
-    id: 3,
-    text: "Card right",
-},{
-    id: 4,
-    text: "4",
-}];
+const cardProps = [{
+  title: "Wind",
+  description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod, consectetur adipiscing elit, sed do eiusmod , sed do eiusmod , consectetur adipiscing elit, sed do eiusmod , sed do eiusmod    .`,
+  src:'/public/wind-turbine.jpg',
+  color: '#B88700',
+  },{
+      title: "PV",
+      description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
+          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+          commodo consequat.`,
+      src: '/public/wind-turbine.jpg',
+      color: '#B88700',
+  },{
+      title: "Pilotprojekte",
+      description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
+          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+          commodo consequat.`,
+      src: '/public/wind-turbine.jpg',
+      color: '#B88700',
+  }, {
+      title: "Test",
+      description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
+          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+          commodo consequat.`,
+      src: '/public/wind-turbine.jpg',
+      color: '#B88700',
+  },
+]
 
 function App() {
   //const isSmallDevice = useIsSmallDevice('md');
+
+  const cards = Object.entries(cardProps).map(([, { title, description, src, color }], index) => ({
+    id: index,
+    title,
+    description,
+    src,
+    color,
+  }));
 
   return (
     <Box align="center"
