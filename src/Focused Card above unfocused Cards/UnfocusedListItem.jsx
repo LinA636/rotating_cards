@@ -19,7 +19,6 @@ export default function UnfocusedListItem({ index, card, onClick }){
                         <PerformanceCard
                         id={card.id}
                         title={card.title}
-                        description={card.description}
                         src={card.src}
                         color={card.color}
                         width={'300'}

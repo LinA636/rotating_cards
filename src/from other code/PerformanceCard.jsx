@@ -13,13 +13,13 @@ import TitleAndText from './TitleAndText';
 /** import texts */
 
 
-const getCardHeaderHeight = (height, isFrontCard) => isFrontCard ? `calc(${height} * 0.24)` : `calc(${height} * 0.38)`;
+const getCardHeaderHeight = (height, isFocusedCard) => isFocusedCard ? `calc(${height} * 0.24)` : `calc(${height} * 0.38)`;
 const noOfLines = '2';
 
 export default function PerformanceCard({id, title, description, src, color, width, height, toggleFunction, opacity, cardIndex}){
-    const isFrontCard = cardIndex === 0;
-    const headerHeight = getCardHeaderHeight(height, isFrontCard);
-    const cardVariant = isFrontCard ? 'activeCard' : 'hiddenCard';
+    const isFocusedCard = description !== undefined; 
+    const headerHeight = getCardHeaderHeight(height, isFocusedCard);
+    const cardVariant = isFocusedCard ? 'activeCard' : 'hiddenCard';
     
     return (
         <Card
@@ -51,22 +51,23 @@ export default function PerformanceCard({id, title, description, src, color, wid
                     noOfLines={noOfLines}/>
             </CardHeader>
 
+        
             <CardBody
                 flex={"1"} 
                 overflow={"hidden"}
                 width={"100%"}
                 height={"100%"}
                 
-                display={isFrontCard ? 'grid' : ''}
+                display={isFocusedCard ? 'grid' : ''}
                 gridTemplateColumns={'2fr 3fr'}>
 
-                { isFrontCard && (
+                { isFocusedCard && (
                     <TitleAndText 
                     text={description} 
                     variant={cardVariant}
                     noOfLines={noOfLines}/>
                 )}
-                 
+                
                 <Image
                     objectFit='cover'
                     src={src}
