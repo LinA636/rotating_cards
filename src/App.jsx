@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@chakra-ui/react';
+import { Grid } from '@chakra-ui/react';
 import RotatingCardContainer3Cards from './Rotating cards horizontally/RotatingCardContainer3Cards';
 import RotatingCardsContainerMoreThan3 from './Rotating cards horizontally/RotatingCardsContainerMoreThan3';
 import ClickContainerCards from './Focused Card above unfocused Cards/ClickContainerCards';
@@ -49,10 +49,12 @@ function App() {
   }));
 
   return (
-    <Box align="center"
+    <Grid align="center" gap={'50px'}
       width={"100vw"}>
         <ClickContainerCards cards={cards} />
-    </Box>
+        <RotatingCardsContainerMoreThan3 cards={cards} />
+        <RotatingCardContainer3Cards cards={cards} />
+    </Grid>
   )
 }
 

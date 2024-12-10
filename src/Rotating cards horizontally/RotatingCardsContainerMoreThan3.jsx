@@ -9,30 +9,28 @@ import React, { useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import { Flipper, Flipped } from "react-flip-toolkit";
 import ContentCard from "./ContentCard";
+import PerformanceCard from "../from other code/PerformanceCard";
 
-const cards = [{
-    id: 1,
-    text: "Card left",
-},{
-    id: 2,
-    text: "Card front",
-},{
-    id: 3,
-    text: "Card right",
-},{
-    id: 4,
-    text: "4",
-},{
-  id: 5,
-  text: "5",
-}];
 
-const cardsLength = cards.length;
-const frontCardSize = { width: 300, height: 400 };
 
-export default function RotatingCardsContainer() {
+export default function RotatingCardsContainer({cards}) {
   const [cardOrder, setCardOrder] = useState(cards);
   const [isAnimating, setIsAnimating] = useState(false);
+
+  const cardsLength = cards.length;
+  const frontCardSize = { width: 300, height: 400 };
+  
+  const calculateSize = (origSize, index, isFrontCard) => {
+    const multiplierWidth = isFrontCard? 1.5 : Math.pow(0.8, index);
+    const multiplierHeight = isFrontCard? 1.2 : Math.pow(0.8, index);
+    const width = Math.round(parseInt(origSize.width, 10) * multiplierWidth);
+    const height = Math.round(parseInt(origSize.height, 10) * multiplierHeight);
+    return { width: `${width}px`, height: `${height}px` };
+  };
+
+  const getCardSize = (origSize, index) => {
+    return calculateSize(origSize, index, index === 0);
+  };
 
   const rotateOneStep = () => {
     setCardOrder(prev => [...prev.slice(1), prev[0]]);
@@ -67,6 +65,7 @@ export default function RotatingCardsContainer() {
         position="relative">
         {cardOrder.map((card, index) => {
           const isFrontCard = index == 0;
+          const {width, height} = getCardSize(frontCardSize, index);
           return (
             <Flipped 
               key={card.id} 
@@ -76,14 +75,17 @@ export default function RotatingCardsContainer() {
                 transform={isFrontCard ? '' : `translateX(${index * -40}px)`}
                 zIndex={cardsLength - index}
                 transition="all linear">
-                <ContentCard
+                <PerformanceCard
                   id={card.id}
-                  text={card.text}
-                  width={frontCardSize.width/(index + 1)}
-                  height={frontCardSize.height/(index + 1)}
+                  title={card.title}
+                  description={isFrontCard ? card.description : undefined}
+                  src={card.src}
+                  color={card.color}
+                  width={width}
+                  height={height}
+                  variant={index === 0 ? 'activeCard' : 'hiddenCard'}
                   toggleFunction={() => handleCardClick(card.id)}
-                  fontSize={frontCardSize.width / (index + 1) * 0.1} 
-                />
+                  cardIndex={card.id}/>
               </Box>
             </Flipped>
           );
