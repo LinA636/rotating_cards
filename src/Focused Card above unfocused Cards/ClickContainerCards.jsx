@@ -14,9 +14,7 @@ export default function ClickContainerCard({ cards }) {
 
   const focusedCard = focused !== null ? cards[focused] : null;
   const unfocusedCards = cards.filter((_, index) => index !== focused);
-
-  console.log('focusedCard', focusedCard);
-  console.log('unfocusedCards', unfocusedCards);
+  
   return (
     <Flipper
       flipKey={focused}
