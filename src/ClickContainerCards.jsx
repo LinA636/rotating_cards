@@ -1,21 +1,7 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import { Flipper, Flipped } from "react-flip-toolkit";
 import ContentCard from "./ContentCard";
 
-const cards = [{
-    id: 1,
-    text: "Card left",
-},{
-    id: 2,
-    text: "Card front",
-},{
-    id: 3,
-    text: "Card right",
-},{
-    id: 4,
-    text: "4",
-},];
 
 const createCardFlipId = index => `listItem-${index}`;
 
@@ -29,7 +15,7 @@ const ListItem = ({ index, card, onClick }) => {
       stagger="card"
       shouldInvert={shouldFlip(index)}
     >
-      <div className="listItem" onClick={() => onClick(index)}>
+      <div className="listItem" onClick={() => onClick(index)} style={{ display: 'inline-block', margin: '0 10px' }}>
         <Flipped inverseFlipId={createCardFlipId(index)}>
           <div className="listItemContent">
             <ContentCard
@@ -96,10 +82,10 @@ class ClickContainerCards extends Component {
         }}
         decisionData={this.state.focused}
       >
-        <ul className="list" style={{padding: 0 }}>
+        <ul className="list" style={{ padding: 0, display: 'flex', justifyContent: 'center' }}>
           {cards.map((card, index) => {
             return (
-              <li key={index}>
+              <li key={index} style={{ listStyleType: 'none' }}>
                 {index === this.state.focused ? (
                   <ExpandedListItem
                     index={this.state.focused}

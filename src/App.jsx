@@ -17,9 +17,6 @@ const cards = [{
 },{
     id: 4,
     text: "4",
-},{
-  id: 5,
-  text: "5",
 }];
 
 function App() {
