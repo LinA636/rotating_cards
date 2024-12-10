@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Flipper, Flipped } from "react-flip-toolkit";
 import ContentCard from "./ContentCard";
+import { Flex, Grid } from "@chakra-ui/react";
 
 const createCardFlipId = index => `listItem-${index}`;
 
@@ -83,8 +84,14 @@ export default function ClickContainerCard ({ cards }) {
       }}
       decisionData={focused}
     >
-      <div style={{ display: 'grid', gridTemplateRows: '1fr 1fr', gap: '20px' }}>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <Grid gridTemplateRows={'1fr 1fr'} 
+            gridTemplateColumns={'1fr 1fr 1fr'}
+            gap = '20px'
+            width='auto'
+            justifyContent='start'
+            gridTemplateAreas={`"header header header" "content1 content2 content3"`}>
+        
+        <Flex gridArea='header' justifyContent='center' alignItems='center'>
           {focusedCard && (
             <ExpandedListItem
               index={focused}
@@ -92,17 +99,16 @@ export default function ClickContainerCard ({ cards }) {
               onClick={onClick}
             />
           )}
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: `repeat(${unfocusedCards.length}, 1fr)`, gap: '10px' }}>
+        </Flex>
+
           {unfocusedCards.map((card, index) => {
             return (
-              <div key={card.id} style={{ display: 'flex', justifyContent: 'center' }}>
+              <Flex key={card.id} justifyContent='center'>
                 <ListItem index={index} card={card} onClick={onClick} />
-              </div>
+              </Flex>
             );
           })}
-        </div>
-      </div>
+      </Grid>
     </Flipper>
   );
 };
