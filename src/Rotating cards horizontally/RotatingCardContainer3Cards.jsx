@@ -1,25 +1,18 @@
 import React, { useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import { Flipper, Flipped } from "react-flip-toolkit";
-import ContentCard from "./ContentCard";
+import PerformanceCard from "../from other code/PerformanceCard";
 
 const [frontCardHeight, backCardHeight] = ['400px', '300px'];
 const [frontCardWidth, backCardWidth] = ['300px', '200px'];
 
-const cards = [{
-        id: "left",
-        text: "Card left",
-    },{
-        id: "front",
-        text: "Card front",
-    },{
-        id: "right",
-        text: "Card right",
-    }];
 
+export default function RotatingCardContainer3Cards ({cards}) {
+  const [activeCard, setActiveCard] = useState(0);
 
-export default function RotatingCardContainer3Cards () {
-  const [activeCard, setActiveCard] = useState('front');
+  if (cards.length !== 3) {
+    throw new Error('This component only works with 3 cards');
+  }
 
   const toggleMoveCards = (id) => {
     setActiveCard(id);
@@ -60,16 +53,18 @@ export default function RotatingCardContainer3Cards () {
                     overshootClamping: true,}} >
                 <Box 
                   position={isMiddle? 'absolute' : 'relative'}
-                  zIndex={isMiddle ? 2 : 1}
-                  >
-                    <ContentCard
+                  zIndex={isMiddle ? 2 : 1}>
+                    <PerformanceCard
                       id={card.id}
-                      text={card.text}
+                      title={card.title}
+                      description={isMiddle ? card.description : undefined}
+                      src={card.src}
+                      color={card.color}
                       width={isMiddle ? frontCardWidth : backCardWidth}
                       height={isMiddle ? frontCardHeight: backCardHeight}
+                      variant={isMiddle ? 'activeCard' : 'hiddenCard'}
                       toggleFunction={() => toggleMoveCards(card.id)}
-                      opacity={isMiddle ? 1 : 0.5}
-                      />
+                      cardIndex={card.id}/>
                 </Box>
               </Flipped>
             );

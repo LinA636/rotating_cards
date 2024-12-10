@@ -53,7 +53,7 @@ function App() {
       width={"100vw"}>
         <ClickContainerCards cards={cards} />
         <RotatingCardsContainerMoreThan3 cards={cards} />
-        <RotatingCardContainer3Cards cards={cards} />
+        <RotatingCardContainer3Cards cards={cards.slice(0, 3)} />
     </Grid>
   )
 }
